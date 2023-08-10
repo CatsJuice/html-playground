@@ -12,15 +12,13 @@ importers:
         specifier: ^0.1.2
         version: registry.npmmirror.com/init@0.1.2
 
-  packages/figma-paper: {}
-
-  packages/react-template:
+  templates/react:
     devDependencies:
       vite:
         specifier: ^4.4.9
         version: registry.npmmirror.com/vite@4.4.9
 
-  packages/vue-template:
+  templates/vue:
     dependencies:
       vite:
         specifier: ^4.4.9

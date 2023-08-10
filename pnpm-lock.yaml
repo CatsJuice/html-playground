@@ -1,0 +1,28 @@
+lockfileVersion: '6.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+dependencies:
+  init:
+    specifier: ^0.1.2
+    version: registry.npmmirror.com/init@0.1.2
+
+packages:
+
+  registry.npmmirror.com/daemon@1.1.0:
+    resolution: {integrity: sha512-1vX9YVcP21gt12nSD3SQRC/uPU7fyA6M8qyClTBIFuiRWoylFn57PwXhjBAqRl085bZAje7sILhZU48qcS9SWw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/daemon/-/daemon-1.1.0.tgz}
+    name: daemon
+    version: 1.1.0
+    engines: {node: '>= 0.8.0'}
+    dev: false
+
+  registry.npmmirror.com/init@0.1.2:
+    resolution: {integrity: sha512-IvHUjULS2q+BXJdiu4FHkByh3+qSFmkOXQ2ItSfYTtkdUksQc0yNX6f1uDyokzRV71tjpFsFc3ckeYLJXunTGw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/init/-/init-0.1.2.tgz}
+    name: init
+    version: 0.1.2
+    engines: {node: '>=0.4.7'}
+    dependencies:
+      daemon: registry.npmmirror.com/daemon@1.1.0
+    dev: false

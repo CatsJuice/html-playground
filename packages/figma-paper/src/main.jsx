@@ -124,15 +124,18 @@ const Papers = ({ size = 200, onCreate }) => {
   const startPos = useRef({ x: 0, y: 0 });
   const rect = useRef(null);
 
-  const onMouseDown = (e) => {
+  const onMouseDown = (e) => dragStart(e.clientX, e.clientY);
+  const touchStart = (e) => dragStart(e.touches[0].clientX, e.touches[0].clientY);
+
+  const dragStart = (x, y) =>  {
     setDragging(true);
-    startPos.current = { x: e.clientX, y: e.clientY };
+    startPos.current = { x, y };
     rect.current = dockRef.current.getBoundingClientRect();
-  };
-  const onMouseMove = (e) => {
+  }
+  const onMouseMove = (e) => onDrag(e.clientX, e.clientY);
+  const touchMove = (e) => onDrag(e.touches[0].clientX, e.touches[0].clientY);
+  const onDrag = (x, y) => {
     if (!dragging) return;
-    const x = e.clientX;
-    const y = e.clientY;
     setOffset({
       x: x - startPos.current.x,
       y: y - startPos.current.y,
@@ -140,7 +143,7 @@ const Papers = ({ size = 200, onCreate }) => {
     const isOut =
       y < rect.current.top || x < rect.current.left || x > rect.current.right;
     setOut(isOut);
-  };
+  }
   const onEnd = (e) => {
     if (!dragging) return;
     setDragging(false);
@@ -156,9 +159,13 @@ const Papers = ({ size = 200, onCreate }) => {
   useEffect(() => {
     window.addEventListener("mouseup", onEnd);
     window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("touchmove", touchMove);
+    window.addEventListener("touchend", onEnd);
     return () => {
       window.removeEventListener("mouseup", onEnd);
       window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("touchmove", touchMove);
+      window.removeEventListener("touchend", onEnd);
     };
   });
 
@@ -186,6 +193,7 @@ const Papers = ({ size = 200, onCreate }) => {
             style={{ "--x": `${offset.x}px`, "--y": `${offset.y}px` }}
             className="paper-wrapper"
             onMouseDown={onMouseDown}
+            onTouchStart={touchStart}
           >
             <Paper
               color={colors[3]}

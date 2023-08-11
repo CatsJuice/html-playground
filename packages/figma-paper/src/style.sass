@@ -3,8 +3,112 @@
   padding: 0
   box-sizing: border-box
 
-
 html,
 body
   width: 100%
   height: 100%
+
+body
+  background: #fff
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='2' fill='%23eeeeee'/%3E%3C/svg%3E")
+
+svg.paper
+  filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.15))
+
+.dock-wrapper
+  --w: 300px
+  --h: 120px
+  --br: 24px
+  width: var(--w)
+  height: var(--h)
+  max-width: 100%
+  display: flex
+  justify-content: center
+  align-items: flex-end
+  position: fixed
+  bottom: 30px
+  left: calc(50% - var(--w) / 2)
+
+.dock-clip
+  --pd: 10000px
+  --pd-n: -10000px
+  overflow: clip
+  padding: var(--pd) var(--pd) 0
+  margin: var(--pd-n) var(--pd-n) 0
+  // height: calc(var(--pd) + var(--h))
+  // width: calc(var(--pd) * 2 + var(--w))
+  pointer-events: none
+  display: flex
+  justify-content: center
+  align-items: flex-end
+  flex-shrink: 0
+  border-radius: var(--br)
+
+.dock
+  border: 1px solid #ccc
+  border-radius: inherit
+  background: white
+  position: relative
+  height: var(--h)
+  width: var(--w)
+  display: flex
+  justify-content: center
+  pointer-events: auto
+
+.absolute
+  position: absolute
+
+.dock .paper-wrapper
+  position: absolute
+  margin-top: 20px
+  margin-left: 50px
+  transform-origin: 0% 100%
+  transition: all 0.4s ease
+
+  &:nth-child(3)
+    transform: rotate(-15deg) translateY(30px) translateX(-10px)
+  &:nth-child(2)
+    transform: rotate(-25deg) translateY(45px) translateX(-30px)
+  &:nth-child(1)
+    transform: rotate(-35deg) translateY(85px) translateX(-50px)
+
+  &:nth-child(4)
+    cursor: grab
+    transform: translateX(var(--x)) translateY(var(--y))
+    &:hover
+      margin-top: 10px
+
+.dock:not(.dragging) .paper-wrapper
+  transition: none
+
+.dock.dragging .paper-wrapper
+  &:nth-child(4)
+    cursor: grabbing
+
+
+
+.dock.dragging.out .paper-wrapper
+  &:nth-child(3)
+    transform: rotate(0deg) translateY(0px) translateX(0px)
+  &:nth-child(2)
+    transform: rotate(-15deg) translateY(30px) translateX(-10px)
+  &:nth-child(1)
+    transform: rotate(-25deg) translateY(45px) translateX(-30px)
+
+.dock:not(.out) .paper-wrapper:nth-child(4)
+  transition: all 0.4s ease
+.dock.dragging .paper-wrapper:nth-child(4)
+  transition: none
+.dock.out .paper-wrapper:nth-child(4)
+  transition: none
+
+
+.canvas
+  width: 100vw
+  height: 100vh
+  position: fixed
+  top: 0
+  left: 0
+
+  .graphic
+    position: absolute

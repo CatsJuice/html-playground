@@ -4,10 +4,10 @@ const App = () => {
   const [graphics, setGraphics] = useState([]);
   const size = 140;
   return (
-    <div>
+    <>
       <Canvas graphics={graphics} size={size} />
       <Papers size={size} onCreate={(e) => setGraphics([...graphics, e])} />
-    </div>
+    </>
   );
 };
 
@@ -183,10 +183,7 @@ const Papers = ({ size = 200, onCreate }) => {
               </div>
             ))}
           <div
-            style={{
-              "--x": offset.x + "px",
-              "--y": offset.y + "px",
-            }}
+            style={{ "--x": `${offset.x}px`, "--y": `${offset.y}px` }}
             className="paper-wrapper"
             onMouseDown={onMouseDown}
           >
@@ -275,12 +272,14 @@ function getRollD(distance = 80, size = 500) {
 }
 function getRandomPaperColor() {
   const colors = [
-    "#FFBDF2",
-    "#FF8F42",
     "#9A73EF",
     "#F6A89B",
     "#64D183",
     "#66A9ED",
+    "#F3CD6F",
+    "#D4C8C5",
+    "#F8C89D",
+    "#F8C89D",
   ];
   return colors[Math.floor(Math.random() * colors.length)];
 }

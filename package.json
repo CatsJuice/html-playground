@@ -1,6 +1,14 @@
 {
 	"name": "html-playground",
+	"scripts": {
+		"build": "node .build.mjs"
+	},
 	"dependencies": {
 		"init": "^0.1.2"
+	},
+	"devDependencies": {
+		"execa": "^7.2.0",
+		"glob": "^10.3.3",
+		"shx": "^0.3.4"
 	}
 }

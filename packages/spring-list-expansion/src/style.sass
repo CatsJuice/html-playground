@@ -1,0 +1,41 @@
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+  user-select: none
+
+html,
+body
+  width: 100%
+  height: 100%
+  padding: 20px
+
+ul
+  margin-left: 10px
+
+li
+  cursor: default
+  padding-left: 10px
+  border-radius: 5px
+  padding: 5px 10px
+  font-size: 1.2rem
+
+li::marker
+  content: '•'
+  display: inline-block
+  margin-right: 0.5em
+  color: #999
+
+li.expandable
+  cursor: pointer
+  &::marker
+    content: '▶'
+    font-size: 0.5rem
+    transition: transform 0.2s ease-in-out
+    color: #222
+
+  & > div
+    overflow: hidden
+li.expanded
+  &::marker
+    transform: rotate(90deg)

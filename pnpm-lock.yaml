@@ -28,6 +28,12 @@ importers:
         specifier: ^4.4.9
         version: registry.npmmirror.com/vite@4.4.9
 
+  packages/spring-list-expansion:
+    devDependencies:
+      vite:
+        specifier: ^4.4.9
+        version: registry.npmmirror.com/vite@4.4.9
+
   templates/react:
     devDependencies:
       vite:

@@ -86,16 +86,32 @@ body {
 .shapes {
   width: 80px;
   height: 80px;
-  color: #967ecd;
+  color: #9747FF;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
 }
 .shapes .shape {
-  height: 50px;
+  --x: 0px;
+  --y: 0px;
+  --offset-x: 0px;
+  --offset-y: 0px;
+  --scale: 1;
+  --rotate: 0deg;
+  transform: translateX(calc(var(--offset-x) + var(--x))) translateY(calc(var(--y) + var(--offset-y))) scale(var(--scale)) rotate(var(--rotate));
+  height: 60px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
+  transition: all 0.5s cubic-bezier(0, -0.01, 0.01, 1.01);
 }
 .shapes .shape svg {
   height: 100%;
+  filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.15));
+}
+.shapes .shape.dragging {
+  transition: none;
 }/*# sourceMappingURL=style.css.map */

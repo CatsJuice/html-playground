@@ -22,6 +22,12 @@ importers:
         specifier: ^0.3.4
         version: registry.npmmirror.com/shx@0.3.4
 
+  packages/blocksuite-edgeless-shape:
+    devDependencies:
+      vite:
+        specifier: ^4.4.9
+        version: registry.npmmirror.com/vite@4.4.9
+
   packages/figma-paper:
     devDependencies:
       vite:

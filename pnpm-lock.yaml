@@ -22,6 +22,12 @@ importers:
         specifier: ^0.3.4
         version: registry.npmmirror.com/shx@0.3.4
 
+  packages/block-grab:
+    devDependencies:
+      vite:
+        specifier: ^4.4.9
+        version: registry.npmmirror.com/vite@4.4.9
+
   packages/blocksuite-edgeless-shape:
     devDependencies:
       vite:
@@ -29,6 +35,12 @@ importers:
         version: registry.npmmirror.com/vite@4.4.9
 
   packages/figma-paper:
+    devDependencies:
+      vite:
+        specifier: ^4.4.9
+        version: registry.npmmirror.com/vite@4.4.9
+
+  packages/grid-pattern:
     devDependencies:
       vite:
         specifier: ^4.4.9

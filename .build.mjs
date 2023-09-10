@@ -10,16 +10,26 @@ const DIST_DIR = path.join(ROOT_DIR, "dist");
 async function clean() {
   if (!fs.existsSync(DIST_DIR)) return fs.mkdirSync(DIST_DIR);
   await execa("shx", ["rm", "-rf", DIST_DIR]);
+  await execa("shx", ["mkdir", "-p", DIST_DIR]);
 }
 
 const packages = [];
 
 async function buildPkg(p) {
-  // copy index.html & src
   const pkgDir = path.dirname(p);
   const pkgName = path.basename(pkgDir);
   const pkgDistDir = path.join(DIST_DIR, pkgName);
   fs.mkdirSync(pkgDistDir);
+
+  // read .config.json
+  const configPath = path.join(pkgDir, ".config.json");
+  let config = {};
+  if (fs.existsSync(configPath))
+    config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+  if (config.wip) return;
+
+
+  // copy index.html & src
   const indexHtml = path.join(pkgDir, "index.html");
   const srcDir = path.join(pkgDir, "src");
   await execa("shx", ["cp", "-r", indexHtml, srcDir, pkgDistDir]);

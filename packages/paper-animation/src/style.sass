@@ -1,10 +1,112 @@
+:root
+  --w: 300px
+  --h: 400px
+  --duration: 2s
+  --easing: cubic-bezier(.63,.09,.54,1.46)
+  --card-bg: #fff
 *
   margin: 0
   padding: 0
   box-sizing: border-box
-
+  perspective: 10000px
+  transform-style: preserve-3d
+  color: #333
 
 html,
-body
+body,
+#root
   width: 100%
   height: 100%
+html
+  background: #eee
+
+
+// dark media query
+@media (prefers-color-scheme: dark)
+  *
+    color: #eee
+  html
+    background: #222
+  :root
+    --card-bg: #333
+
+#root
+  display: flex
+  justify-content: center
+  align-items: center
+  // transform: translateZ(-100px) rotateY(-50deg) rotateX(10deg)
+
+.paper
+  // border: 2px solid #ccc
+
+  --depth: 5
+  width: var(--w)
+  height: var(--h)
+  position: relative
+
+.paper > .segment
+  height: calc(1 / var(--depth) * 100%)
+
+.segment
+  width: 100%
+  height: 100%
+  background: var(--card-bg)
+  position: absolute
+  border-bottom: none
+  border-top: none
+
+  & > .segment
+    top: 100%
+    transform-origin: top
+
+  .content-wrapper
+    width: 100%
+    height: 100%
+    overflow: hidden
+    position: absolute
+    & > .content
+      position: absolute
+      width: var(--w)
+      height: var(--h)
+      top: calc((var(--depth) - var(--level)) * -100%)
+
+article
+  padding: 20px
+  
+  h1
+    margin-bottom: 20px
+  p
+    line-height: 1.5
+    font-weight: 300
+    margin-bottom: 16px
+    text-align: justify
+    text-align-last: left
+    word-break: break-word
+  a
+    color: #138D75
+    margin: 0px 5px
+  code
+    background: rgba(100, 100, 100, 0.1)
+    padding: 2px 4px
+    border-radius: 2px
+    color: #138D75
+    font-family: monospace
+    margin: 0px 5px
+  
+
+// animations
+.paper
+  animation: enter var(--duration) var(--easing) forwards
+  @keyframes enter
+    0%
+      transform: translateZ(200px) rotateY(0deg) rotateX(0deg)
+    100%
+      transform: translateZ(0px) rotateY(0deg) rotateX(0deg)
+
+.move-in
+  animation: moveIn var(--duration) ease forwards
+  @keyframes moveIn
+    0%
+      transform: translateX(-100vw) translateY(10vh) rotateX(20deg) rotateY(-40deg) rotateZ(-80deg)
+    100%
+      transform: translateX(0vw) translateY(0vh) rotateX(0deg) rotateY(0deg) rotateZ(0deg)

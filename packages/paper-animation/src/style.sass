@@ -2,7 +2,6 @@
   --w: 300px
   --h: 400px
   --duration: 2s
-  --easing: cubic-bezier(.63,.09,.54,1.46)
   --card-bg: #fff
 *
   margin: 0
@@ -99,10 +98,10 @@ article
 
 // animations
 .paper
-  animation: enter var(--duration) var(--easing) forwards
+  animation: enter var(--duration) ease forwards
   @keyframes enter
     0%
-      transform: translateZ(200px) rotateY(0deg) rotateX(0deg)
+      transform: translateZ(4000px) rotateY(0deg) rotateX(0deg)
     100%
       transform: translateZ(0px) rotateY(0deg) rotateX(0deg)
 
@@ -110,6 +109,36 @@ article
   animation: moveIn var(--duration) ease forwards
   @keyframes moveIn
     0%
-      transform: translateX(-100vw) translateY(10vh) rotateX(20deg) rotateY(-40deg) rotateZ(-80deg)
+      transform: translateX(0vw) translateY(10vh) rotateX(20deg) rotateY(-40deg) rotateZ(-80deg)
     100%
       transform: translateX(0vw) translateY(0vh) rotateX(0deg) rotateY(0deg) rotateZ(0deg)
+
+
+.replay-btn
+  padding: 10px 20px
+  border-radius: 8px
+  background: #138D75
+  color: #fff
+  position: fixed
+  bottom: 20px
+  left: 50%
+  transform: translateX(-50%)
+  border: none
+  cursor: pointer
+  display: flex
+  align-items: center
+  gap: 4px
+
+  &:active
+    box-shadow: 0px 0px 0px 2px #138D7530
+
+  &::after
+    content: ""
+    position: absolute
+    inset: 0
+    border-radius: inherit
+    background: #fff
+    opacity: 0
+    transition: opacity 0.2s ease
+  &:hover::after
+    opacity: 0.1

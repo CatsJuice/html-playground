@@ -4,14 +4,20 @@ const rotateX = 360 / segments;
 const easing = "spring(5, 100, 10, 0)";
 
 const App = () => {
+  const [key, setKey] = React.useState(0);
   return (
-    <div className="move-in">
-      <Paper
-        segments={segments}
-        centerIndex={Math.min(segments - 1, Math.max(0, centerIndex))}
-        content={<Content />}
-      />
-    </div>
+    <>
+      <div className="move-in" key={key}>
+        <Paper
+          segments={segments}
+          centerIndex={Math.min(segments - 1, Math.max(0, centerIndex))}
+          content={<Content />}
+        />
+      </div>
+      <button className="replay-btn" onClick={() => setKey(key + 1)}>
+        Replay
+      </button>
+    </>
   );
 };
 

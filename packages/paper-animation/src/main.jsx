@@ -1,30 +1,29 @@
-const depth = 10;
-const rotateX = depth * 2.5;
+const segments = 8;
+const centerIndex = 3;
+const rotateX = 360 / segments;
+const easing = "spring(5, 100, 10, 0)";
 
 const App = () => {
-  React.useEffect(() => {
-    anime({
-      targets: ".segment > .segment",
-      rotateX: [rotateX, 0],
-      easing: "spring(5, 100, 10, 0)",
-    });
-  }, []);
-
   return (
-    <>
-      <div className="move-in">
-        <Paper depth={depth} content={<Content />} />
-      </div>
-    </>
+    <div className="move-in">
+      <Paper
+        segments={segments}
+        centerIndex={Math.min(segments - 1, Math.max(0, centerIndex))}
+        content={<Content />}
+      />
+    </div>
   );
 };
 
 ReactDOM.createRoot(root).render(<App />);
 
-const Segment = ({ children, content, level, ...attrs }) => {
+const Context = React.createContext();
+
+const Segment = ({ children, index, direction, ...attrs }) => {
+  const { content } = React.useContext(Context);
   return (
-    <div className="segment" {...attrs}>
-      <div className="content-wrapper" style={{ "--level": level }}>
+    <div className="segment" {...attrs} data-direction={direction}>
+      <div className="content-wrapper" style={{ "--index": index }}>
         <div className="content">{content}</div>
       </div>
       {children}
@@ -32,29 +31,68 @@ const Segment = ({ children, content, level, ...attrs }) => {
   );
 };
 
-const Segments = ({ depth, content }) => {
+const Segments = ({ level, direction, root, index }) => {
+  if (!level) return null;
+
+  const { centerIndex, segments } = React.useContext(Context);
+  if (root) {
+    const up = centerIndex;
+    const down = segments - up - 1;
+    const vars = {
+      "--segments": segments,
+      "--segments-up": up,
+      "--segments-down": down,
+    };
+    return (
+      <Segment data-root={true} style={vars} index={up}>
+        <Segments index={up - 1} level={up} direction="up" />
+        <Segments index={up + 1} level={down} direction="down" />
+      </Segment>
+    );
+  }
+
   const children =
-    depth === 1 ? null : <Segments depth={depth - 1} content={content} />;
+    level === 1 ? null : (
+      <Segments
+        direction={direction}
+        index={direction === "up" ? index - 1 : index + 1}
+        level={level - 1}
+      />
+    );
   return (
-    <Segment data-depth={depth} content={content} level={depth}>
+    <Segment direction={direction} index={index}>
       {children}
     </Segment>
   );
 };
 
-const Paper = ({ depth, content }) => {
-  const variables = { "--depth": depth };
+const Paper = ({ segments, centerIndex, content }) => {
+  React.useEffect(() => {
+    anime({
+      targets: '.segment[data-direction="up"]',
+      rotateX: [-rotateX, 0],
+      easing,
+    });
+    anime({
+      targets: '.segment[data-direction="down"]',
+      rotateX: [rotateX, 0],
+      easing,
+    });
+  }, []);
+
   return (
-    <div className="paper" style={variables}>
-      <Segments content={content} depth={depth} />
-    </div>
+    <Context.Provider value={{ segments, centerIndex, content }}>
+      <div className="paper">
+        <Segments level={segments} root={true} />
+      </div>
+    </Context.Provider>
   );
 };
 
 const Content = () => {
   return (
     <article>
-      <h1>🤗 Hi</h1>
+      <h1>🤗 Effects</h1>
       <p>
         Effects are an
         <a href="https://react.dev/learn/escape-hatches" target="_blank">

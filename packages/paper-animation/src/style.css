@@ -44,14 +44,14 @@ html {
 }
 
 .paper {
-  --depth: 5;
+  --segments: 5;
   width: var(--w);
   height: var(--h);
   position: relative;
 }
 
 .paper > .segment {
-  height: calc(1 / var(--depth) * 100%);
+  height: calc(1 / var(--segments) * 100%);
 }
 
 .segment {
@@ -61,8 +61,14 @@ html {
   position: absolute;
   border-bottom: none;
   border-top: none;
+  top: calc(var(--segments-up) / var(--segments) * 100%);
 }
-.segment > .segment {
+.segment > .segment[data-direction=up] {
+  top: unset;
+  bottom: 100%;
+  transform-origin: bottom;
+}
+.segment > .segment[data-direction=down] {
   top: 100%;
   transform-origin: top;
 }
@@ -76,7 +82,7 @@ html {
   position: absolute;
   width: var(--w);
   height: var(--h);
-  top: calc((var(--depth) - var(--level)) * -100%);
+  top: calc((var(--index)) * -100%);
 }
 
 article {

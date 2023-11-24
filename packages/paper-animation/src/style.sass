@@ -20,8 +20,6 @@ body,
 html
   background: #eee
 
-
-// dark media query
 @media (prefers-color-scheme: dark)
   *
     color: #eee
@@ -39,13 +37,13 @@ html
 .paper
   // border: 2px solid #ccc
 
-  --depth: 5
+  --segments: 5
   width: var(--w)
   height: var(--h)
   position: relative
 
 .paper > .segment
-  height: calc(1 / var(--depth) * 100%)
+  height: calc(1 / var(--segments) * 100%)
 
 .segment
   width: 100%
@@ -54,10 +52,16 @@ html
   position: absolute
   border-bottom: none
   border-top: none
+  top: calc(var(--segments-up) / var(--segments) * 100%)
 
   & > .segment
-    top: 100%
-    transform-origin: top
+    &[data-direction="up"]
+      top: unset
+      bottom: 100%
+      transform-origin: bottom
+    &[data-direction="down"]
+      top: 100%
+      transform-origin: top
 
   .content-wrapper
     width: 100%
@@ -68,11 +72,11 @@ html
       position: absolute
       width: var(--w)
       height: var(--h)
-      top: calc((var(--depth) - var(--level)) * -100%)
+      top: calc((var(--index)) * -100%)
 
 article
   padding: 20px
-  
+
   h1
     margin-bottom: 20px
   p
@@ -92,7 +96,6 @@ article
     color: #138D75
     font-family: monospace
     margin: 0px 5px
-  
 
 // animations
 .paper

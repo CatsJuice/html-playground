@@ -28,11 +28,16 @@ async function buildPkg(p) {
     config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
   if (config.wip) return;
 
-
   // copy index.html & src
-  const indexHtml = path.join(pkgDir, "index.html");
-  const srcDir = path.join(pkgDir, "src");
-  await execa("shx", ["cp", "-r", indexHtml, srcDir, pkgDistDir]);
+  if (config.distDir) {
+    await execa("npm", ["run", "build"], { cwd: pkgDir });
+    const distDir = path.join(pkgDir, config.distDir, "*");
+    await execa("shx", ["cp", "-r", distDir, pkgDistDir]);
+  } else {
+    const indexHtml = path.join(pkgDir, "index.html");
+    const srcDir = path.join(pkgDir, "src");
+    await execa("shx", ["cp", "-r", indexHtml, srcDir, pkgDistDir]);
+  }
 
   const cfgFile = path.join(pkgDir, "config.json");
   const cfg = fs.existsSync(cfgFile)
@@ -54,7 +59,7 @@ async function buildPkg(p) {
 }
 
 await clean();
-const pkgs = await glob("./packages/**/index.html", { cwd: ROOT_DIR });
+const pkgs = await glob("./packages/*/index.html", { cwd: ROOT_DIR });
 for (const p of pkgs) {
   await buildPkg(p);
 }

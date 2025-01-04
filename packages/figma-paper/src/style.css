@@ -1,7 +1,8 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 html,
@@ -16,7 +17,8 @@ body {
 }
 
 svg.paper {
-  filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.15));
+  -webkit-filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.15));
+          filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.15));
 }
 
 .dock-wrapper {
@@ -26,9 +28,15 @@ svg.paper {
   width: var(--w);
   height: var(--h);
   max-width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   position: fixed;
   bottom: 30px;
   left: calc(50% - var(--w) / 2);
@@ -41,10 +49,17 @@ svg.paper {
   padding: var(--pd) var(--pd) 0;
   margin: var(--pd-n) var(--pd-n) 0;
   pointer-events: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  flex-shrink: 0;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
   border-radius: var(--br);
 }
 
@@ -55,8 +70,12 @@ svg.paper {
   position: relative;
   height: var(--h);
   width: var(--w);
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   pointer-events: auto;
 }
 
@@ -68,53 +87,75 @@ svg.paper {
   position: absolute;
   margin-top: 20px;
   margin-left: 50px;
-  transform-origin: 0% 100%;
+  -webkit-transform-origin: 0% 100%;
+          transform-origin: 0% 100%;
+  -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
 }
+
 .dock .paper-wrapper:nth-child(3) {
-  transform: rotate(-15deg) translateY(30px) translateX(-10px);
+  -webkit-transform: rotate(-15deg) translateY(30px) translateX(-10px);
+          transform: rotate(-15deg) translateY(30px) translateX(-10px);
 }
+
 .dock .paper-wrapper:nth-child(2) {
-  transform: rotate(-25deg) translateY(45px) translateX(-30px);
+  -webkit-transform: rotate(-25deg) translateY(45px) translateX(-30px);
+          transform: rotate(-25deg) translateY(45px) translateX(-30px);
 }
+
 .dock .paper-wrapper:nth-child(1) {
-  transform: rotate(-35deg) translateY(85px) translateX(-50px);
+  -webkit-transform: rotate(-35deg) translateY(85px) translateX(-50px);
+          transform: rotate(-35deg) translateY(85px) translateX(-50px);
 }
+
 .dock .paper-wrapper:nth-child(4) {
+  cursor: -webkit-grab;
   cursor: grab;
-  transform: translateX(var(--x)) translateY(var(--y));
+  -webkit-transform: translateX(var(--x)) translateY(var(--y));
+          transform: translateX(var(--x)) translateY(var(--y));
 }
+
 .dock .paper-wrapper:nth-child(4):hover {
   margin-top: 10px;
 }
 
 .dock:not(.dragging) .paper-wrapper {
+  -webkit-transition: none;
   transition: none;
 }
 
 .dock.dragging .paper-wrapper:nth-child(4) {
+  cursor: -webkit-grabbing;
   cursor: grabbing;
 }
 
 .dock.dragging.out .paper-wrapper:nth-child(3) {
-  transform: rotate(0deg) translateY(0px) translateX(0px);
+  -webkit-transform: rotate(0deg) translateY(0px) translateX(0px);
+          transform: rotate(0deg) translateY(0px) translateX(0px);
 }
+
 .dock.dragging.out .paper-wrapper:nth-child(2) {
-  transform: rotate(-15deg) translateY(30px) translateX(-10px);
+  -webkit-transform: rotate(-15deg) translateY(30px) translateX(-10px);
+          transform: rotate(-15deg) translateY(30px) translateX(-10px);
 }
+
 .dock.dragging.out .paper-wrapper:nth-child(1) {
-  transform: rotate(-25deg) translateY(45px) translateX(-30px);
+  -webkit-transform: rotate(-25deg) translateY(45px) translateX(-30px);
+          transform: rotate(-25deg) translateY(45px) translateX(-30px);
 }
 
 .dock:not(.out) .paper-wrapper:nth-child(4) {
+  -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
 }
 
 .dock.dragging .paper-wrapper:nth-child(4) {
+  -webkit-transition: none;
   transition: none;
 }
 
 .dock.out .paper-wrapper:nth-child(4) {
+  -webkit-transition: none;
   transition: none;
 }
 
@@ -125,6 +166,8 @@ svg.paper {
   top: 0;
   left: 0;
 }
+
 .canvas .graphic {
   position: absolute;
-}/*# sourceMappingURL=style.css.map */
+}
+/*# sourceMappingURL=style.css.map */

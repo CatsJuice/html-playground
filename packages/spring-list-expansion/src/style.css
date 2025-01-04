@@ -2,9 +2,11 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   -webkit-user-select: none;
      -moz-user-select: none;
+      -ms-user-select: none;
           user-select: none;
 }
 
@@ -28,7 +30,7 @@ li {
 }
 
 li::marker {
-  content: "•";
+  content: '•';
   display: inline-block;
   margin-right: 0.5em;
   color: #999;
@@ -37,16 +39,23 @@ li::marker {
 li.expandable {
   cursor: pointer;
 }
+
 li.expandable::marker {
-  content: "▶";
+  content: '▶';
   font-size: 0.5rem;
+  -webkit-transition: -webkit-transform 0.2s ease-in-out;
+  transition: -webkit-transform 0.2s ease-in-out;
   transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
   color: #222;
 }
+
 li.expandable > div {
   overflow: hidden;
 }
 
 li.expanded::marker {
-  transform: rotate(90deg);
-}/*# sourceMappingURL=style.css.map */
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+/*# sourceMappingURL=style.css.map */

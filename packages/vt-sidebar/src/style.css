@@ -63,12 +63,6 @@ main.closed .sidebar {
   visibility: hidden;
 }
 
-@property --view-transition-duration {
-  syntax: '<number>';
-  initial-value: 0.23;
-  inherits: false;
-}
-
 ::view-transition-old(sidebar),
 ::view-transition-new(sidebar) {
   height: 100%;
@@ -89,23 +83,23 @@ main.closed .sidebar {
 }
 
 .closed::view-transition-old(sidebar) {
-  -webkit-animation: fade-out calc(var(--view-transition-duration) * 1s) both;
-          animation: fade-out calc(var(--view-transition-duration) * 1s) both;
+  -webkit-animation: fade-out 0.23s both;
+          animation: fade-out 0.23s both;
 }
 
 .closed::view-transition-new(content) {
-  -webkit-animation: expand calc(var(--view-transition-duration) * 1s) both;
-          animation: expand calc(var(--view-transition-duration) * 1s) both;
+  -webkit-animation: expand 0.23s both;
+          animation: expand 0.23s both;
 }
 
 .open::view-transition-new(sidebar) {
-  -webkit-animation: fade-in calc(var(--view-transition-duration) * 1s) both;
-          animation: fade-in calc(var(--view-transition-duration) * 1s) both;
+  -webkit-animation: fade-in 0.23s both;
+          animation: fade-in 0.23s both;
 }
 
 .open::view-transition-old(content) {
-  -webkit-animation: collapse calc(var(--view-transition-duration) * 1s) both;
-          animation: collapse calc(var(--view-transition-duration) * 1s) both;
+  -webkit-animation: collapse 0.23s both;
+          animation: collapse 0.23s both;
 }
 
 @-webkit-keyframes fade-in {

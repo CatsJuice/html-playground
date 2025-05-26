@@ -1,4 +1,4 @@
-const { animate } = anime;
+const { animate, createSpring } = anime;
 
 const TextMorphContext = React.createContext();
 const TextMorphProvider = ({ children }) => {
@@ -22,6 +22,7 @@ const TextChar = ({ char, id, index }) => {
 };
 
 const DURATION = 360;
+const ease = "inOutCubic";
 const TextMorph = ({ id, text, ...attrs }) => {
   const ref = React.useRef(null);
   const { map, setMap } = React.useContext(TextMorphContext);
@@ -125,6 +126,7 @@ const TextMorph = ({ id, text, ...attrs }) => {
                 fontFamily: animation.newStyle.fontFamily,
                 color: animation.newStyle.color,
                 duration: DURATION,
+                ease,
               });
             } else if (animation.type === "fade-out") {
               span.style.left = `${animation.box.left}px`;
@@ -136,6 +138,7 @@ const TextMorph = ({ id, text, ...attrs }) => {
               return animate(span, {
                 opacity: { from: 1, to: 0 },
                 duration: DURATION / 2,
+                ease,
               });
             } else if (animation.type === "fade-in") {
               span.style.left = `${animation.box.left}px`;
@@ -148,6 +151,7 @@ const TextMorph = ({ id, text, ...attrs }) => {
                 opacity: { from: 0, to: 1 },
                 duration: DURATION / 2,
                 delay: DURATION / 2,
+                ease,
               });
             }
           })

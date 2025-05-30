@@ -1,7 +1,8 @@
 {
 	"name": "html-playground",
 	"scripts": {
-		"build": "node .build.mjs"
+		"build": "node .build.mjs",
+		"new": "node .new.mjs"
 	},
 	"dependencies": {
 		"init": "^0.1.2"
@@ -9,6 +10,8 @@
 	"devDependencies": {
 		"execa": "^7.2.0",
 		"glob": "^10.3.3",
+		"inquirer": "^12.6.3",
+		"ora": "^8.2.0",
 		"shx": "^0.3.4"
 	}
 }

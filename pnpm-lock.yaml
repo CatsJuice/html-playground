@@ -40,6 +40,12 @@ importers:
         specifier: ^4.4.9
         version: https://registry.npmmirror.com/vite/-/vite-4.4.9.tgz
 
+  packages/bounced-popup:
+    devDependencies:
+      vite:
+        specifier: ^4.4.9
+        version: 4.4.9
+
   packages/drag-clip-path-demo:
     devDependencies:
       vite:

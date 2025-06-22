@@ -2,7 +2,8 @@
 	"name": "html-playground",
 	"scripts": {
 		"build": "node .build.mjs",
-		"new": "node .new.mjs"
+		"new": "node .new.mjs",
+		"dev": "node .dev.mjs"
 	},
 	"dependencies": {
 		"init": "^0.1.2"
